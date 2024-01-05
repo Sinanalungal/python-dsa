@@ -1,2 +1,3 @@
-stack=[1,2]
-print(not stack)
+
+            if value<self.data:
+                if self.left is None:
