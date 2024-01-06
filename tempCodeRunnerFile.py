@@ -1,3 +1,2 @@
 
-            if value<self.data:
-                if self.left is None:
+    def bfs(self,startvertex):

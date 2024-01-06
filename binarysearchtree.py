@@ -83,7 +83,7 @@ class BinarySearchTree:
             elif root.right is None:
                 return root.left
             root.value=self.min_value_right(root.right)
-            root.right=self._delete(root.right,root.key)
+            root.right=self._delete(root.right,root.value)
         return root
         
     def min_value_right(self,node):
@@ -118,7 +118,8 @@ class BinarySearchTree:
             self._inordertraversal(root.left,result)
             result.append(root.value)
             self._inordertraversal(root.right,result)
-
+        
+        
 
 
 # c=BinarySearchTree()
@@ -141,7 +142,7 @@ class MaxHeap:
         self.items=[]
     def heapifyup(self):
         index=len(self.items)-1
-        while index>=0 and self.items[(index-1)//2]<self.items[index]:
+        while index>0 and self.items[(index-1)//2]<self.items[index]:
             self.items[(index-1)//2],self.items[index]=self.items[index],self.items[(index-1)//2]
             index=(index-1)//2
     def insert(self,value):
@@ -220,7 +221,7 @@ c.insert(5)
 c.buildheap([8,3,4,75,32,1])
 print(c.items)
 
-#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  heap sort   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #heap sort
 
 def heapify(arr,n,index):
@@ -246,3 +247,43 @@ def heapsort(arr):
 
 arr=heapsort([3,65,5,6,50,8,9])
 print(arr)
+
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  Trie Implementation   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+class TrieNode:
+    def __init__(self):
+        self.children={}
+        self.is_end=False
+class Trie:
+    def __init__(self):
+        self.root=TrieNode()
+    def insert(self,value):
+        node=self.root
+        for i in value:
+            if i not in node.children:
+                node.children[i]=TrieNode()
+            node=node.children[i]
+        node.is_end=True    
+    def search(self,value):
+        node=self.root
+        for i in value:
+            if i not in node.children:
+                return False
+            node=node.children[i]
+        return node.is_end
+    def prefix_search(self,prefix):
+        node=self.root
+        for i in prefix:
+            if i not in node.children:
+                return []
+            node=node.children[i]
+        result=[]
+        self.collected_words(node,result,prefix)
+        return result
+
+    def collected_words(self,node,result,currentword):
+        if node.is_end:
+            result.append(currentword)
+        for x,y in node.children.items():
+            self.collected_words(y,result,currentword+x)
+    
