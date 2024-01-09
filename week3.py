@@ -113,9 +113,9 @@ class MinHeap:
         minnode=index
         leftchild=(2*index)+1
         rightchild=(2*index)+2
-        if self.root[leftchild]<self.root[minnode]:
+        if leftchild<len(self.root) and self.root[leftchild]<self.root[minnode]:
             minnode=leftchild
-        if self.root[rightchild]<self.root[minnode]:
+        if rightchild<len(self.root) and self.root[rightchild]<self.root[minnode]:
             minnode=rightchild
         if minnode!=index:
             self.root[minnode],self.root[index]=self.root[index],self.root[minnode]

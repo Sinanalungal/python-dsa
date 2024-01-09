@@ -286,4 +286,3 @@ class Trie:
             result.append(currentword)
         for x,y in node.children.items():
             self.collected_words(y,result,currentword+x)
-    
